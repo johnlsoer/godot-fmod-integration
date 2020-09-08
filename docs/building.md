@@ -2,10 +2,10 @@
 
 To compile the module for a different version of Godot, follow these instructions. Precompiled engine binaries are available in the Releases tab but it is recommended to perform a recompilation of the engine with the version of Godot that is currently being used in your project.
 
-1. [Download the FMOD Studio API](https://www.fmod.com/download) (You need to create an account) and extract it somewhere on your system. This integration currently uses the 2.00.02 Early Access release.
+1. [Download the FMOD Studio API](https://www.fmod.com/download) (You need to create an account) and extract it somewhere on your system. This integration currently uses the 2.00.11 release.
 2. Clone the version of Godot currently being used in your project or simply clone the latest version from the [master branch](https://github.com/godotengine/godot).
-3. `cd` into the source directory and add the FMOD integration as a submodule into the `modules` directory `git submodule add https://github.com/alexfonseka/godot-fmod-integration modules/fmod`.
-4. Copy the contents of the `api` directory of the FMOD API into the module's `api` directory `modules/fmod/api`. On Windows this is (usually) found at `C:/Program Files (x86)/FMOD SoundSystem/FMOD Studio API Windows/api`.
+3. `cd` into the source directory and add the FMOD integration as a submodule into the `modules` directory `git clone https://github.com/johnlsoer/godot-fmod-integration fmod`.
+4. The `api` directory already has Fmod api 20.0.11 for android as well as x64 and x86 with some `.lib` files properly renamed. If you want, you can copy your FMOD API into the module's `api` directory `modules/fmod/api`. On Windows this is (usually) found at `C:/Program Files (x86)/FMOD SoundSystem/FMOD Studio API Windows/api`.
 5. Recompile the engine. For more information on compiling the engine, refer to the [Godot documentation](https://docs.godotengine.org/en/latest/development/compiling/index.html).
 6. Place the FMOD dynamically linking library files within the `bin` directory for Godot to start. Eg. on Windows these would be `fmod.dll` and `fmodstudio.dll`. When shipping, these files have to be included with the release.
 
@@ -28,7 +28,7 @@ template. To do so, follow the next steps.
 ```
 dependencies {
 	implementation "com.android.support:support-core-utils:28.0.0"
-	compile files("libs/fmod.jar")
+	implementation files("libs/fmod.jar")
 }
 ```
 
@@ -41,7 +41,7 @@ For `onCreate` you should initialize Java part of FMOD.
 	protected void onCreate(Bundle icicle) {
 
 		super.onCreate(icicle);
-		FMOD.init(this);
+		org.fmod.FMOD.init(this);
 		Window window = getWindow();
 		...
 	}
@@ -57,10 +57,12 @@ For `onDestroy` method, you should close Java part of FMOD.
 		for (int i = 0; i < singleton_count; i++) {
 			singletons[i].onMainDestroy();
 		}
-		FMOD.close();
+		org.fmod.FMOD.close();
 		super.onDestroy();
 	}
 ```
 
-- Then run `./gradlew build` to generate an apk export template. You can then use it in your project to get FMOD working
+- Then run `./gradlew generateGodotTemplates` to generate an apk export template. You can then use it in your project to get FMOD working
   on Android.
+  
+  Detailed instructions on Godot Engine Documentation : https://docs.godotengine.org/en/stable/development/compiling/compiling_for_android.html
