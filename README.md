@@ -6,14 +6,6 @@ FMOD is an audio engine and middleware solution for interactive audio in games. 
 
 This module exposes most of the Studio API functions to Godot's GDScript and also provides helpers for performing common functions like attaching Studio events to Godot nodes and playing 3D/positional audio. _It is still very much a work in progress and some API functions are not yet exposed._ Feel free to tweak/extend it based on your project's needs.
 
-### Latest release
-
-Precompiled engine binaries for Windows, macOS and Linux with FMOD Studio already integrated, is available for downloading in the [Releases](https://github.com/alexfonseka/godot-fmod-integration/releases) tab.
-
-| Current build status | [![Build Status](https://travis-ci.com/alexfonseka/godot-fmod-integration.svg?branch=master)](https://travis-ci.com/alexfonseka/godot-fmod-integration) |
-| -------------------- | :-----------------------------------------------------------------------------------------------------------------------------------------------------: |
-
-
 ### Building
 
 If you wish to compile the module yourself, build instructions are available [here](https://github.com/alexfonseka/godot-fmod-integration/blob/master/docs/building.md).
