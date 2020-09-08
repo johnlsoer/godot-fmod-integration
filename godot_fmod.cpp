@@ -239,7 +239,7 @@ void Fmod::waitForAllLoads() {
 String Fmod::loadbank(const String &pathToBank, int flags) {
 	if (banks.has(pathToBank)) return pathToBank; // bank is already loaded
 	FMOD::Studio::Bank *bank = nullptr;
-	checkErrors(system->loadBankFile(pathToBank.ascii().get_data(), flags, &bank));
+	checkErrors(system->loadBankFile(pathToBank.utf8().get_data(), flags, &bank));
 	if (bank) {
 		banks.insert(pathToBank, bank);
 		return pathToBank;
@@ -1133,6 +1133,15 @@ uint64_t Fmod::getEventDescription(uint64_t instanceId) {
 	return ptr;
 }
 
+//John's edit
+void Fmod::mixerSuspend() {
+	checkErrors(coreSystem->mixerSuspend());
+}
+
+void Fmod::mixerResume() {
+	checkErrors(coreSystem->mixerResume());
+}
+
 // runs on the Studio update thread, not the game thread
 FMOD_RESULT F_CALLBACK Callbacks::eventCallback(FMOD_STUDIO_EVENT_CALLBACK_TYPE type, FMOD_STUDIO_EVENTINSTANCE *event, void *parameters) {
 
@@ -1227,6 +1236,8 @@ void Fmod::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("system_set_driver", "id"), &Fmod::setDriver);
 	ClassDB::bind_method(D_METHOD("system_get_performance_data"), &Fmod::getPerformanceData);
 	ClassDB::bind_method(D_METHOD("system_get_event", "path"), &Fmod::getEvent);
+	ClassDB::bind_method(D_METHOD("system_mixer_suspend"), &Fmod::mixerSuspend);
+	ClassDB::bind_method(D_METHOD("system_mixer_resume"), &Fmod::mixerResume);
 
 	/* Integration helper functions */
 	ClassDB::bind_method(D_METHOD("create_event_instance", "event_path"), &Fmod::createEventInstance);
