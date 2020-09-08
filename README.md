@@ -8,7 +8,7 @@ This module exposes most of the Studio API functions to Godot's GDScript and als
 
 ### Building
 
-If you wish to compile the module yourself, build instructions are available [here](https://github.com/alexfonseka/godot-fmod-integration/blob/master/docs/building.md).
+If you wish to compile the module yourself, build instructions are available [here](https://github.com/johnlsoer/godot-fmod-integration/blob/release/docs/building.md).
 
 ## Using the module
 
