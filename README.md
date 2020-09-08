@@ -214,6 +214,7 @@ func _notification(what):
 		
 	if what == MainLoop.NOTIFICATION_WM_FOCUS_IN:
 		if OS.get_name() == "Android" : Fmod.system_mixer_resume()
+```
 
 ## Contributing
 
