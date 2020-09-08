@@ -205,7 +205,7 @@ print(perf_data.file)
 ```
 
 ### Android Background Suspend
-You will need to use `system_mixer_suspend()` and `system_mixer_resume()` to suspend Fmod mixer on Android devices. 
+You will need to use `system_mixer_suspend()` and `system_mixer_resume()` to suspend or resume Fmod mixer on Android devices. 
 
 ```gdscript
 func _notification(what):
