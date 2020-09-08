@@ -204,6 +204,17 @@ print(perf_data.memory)
 print(perf_data.file)
 ```
 
+### Android Background Suspend
+You will need to use `system_mixer_suspend()` and `system_mixer_resume()` to suspend Fmod mixer on Android devices. 
+
+```gdscript
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+		if OS.get_name() == "Android" : Fmod.system_mixer_suspend()
+		
+	if what == MainLoop.NOTIFICATION_WM_FOCUS_IN:
+		if OS.get_name() == "Android" : Fmod.system_mixer_resume()
+
 ## Contributing
 
 This project is still a work in progress and is probably not yet ready for use in full-blown production. If you run into issues (crashes, memory leaks, broken 3D sound etc.) let us know through the [issue tracker](https://github.com/alexfonseka/godot-fmod-integration/issues). If you are a programmer, sound designer or a composer and wish to contribute, the contribution guidelines are available [here](https://github.com/alexfonseka/godot-fmod-integration/blob/master/.github/contributing.md). Thank you for being interested in this project! ✌
